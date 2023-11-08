@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block head %}
+    <title>Flight Details</title>
+</head>
+<body>
+    <h1>Flight Details</h1>
+    <p>Flight Number: {{ flight.flight_number }}</p>
+    <p>Source: {{ flight.source }}</p>
+    <p>Destination: {{ flight.destination }}</p>
+    <p>Departure Date: {{ flight.departure_date }}</p>
+    <a href="{% url 'book-flight' flight.id %}" class="btn btn-primary">Book Flight</a>
+    <a href="{% url 'flights' %}" class="btn btn-secondary">Back to Flight List</a>
+    {% if user.is_authenticated and user.first_name == 'flight' and user.last_name == 'manager' %}
+    <a href="{% url 'update-flight' flight.id %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'delete-flight' flight.id %}" class="btn btn-danger">Delete</a>
+    {% endif %}
+
+
+</body>
+{% endblock%}
+</html>

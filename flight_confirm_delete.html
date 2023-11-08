@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+    <title>Delete Flight</title>
+{% endblock head %}
+
+{% block body %}
+    <h1>Delete Flight</h1>
+    <p>Are you sure you want to delete the flight ' {{ flight.flight_number }} from {{ flight.source }} to {{ flight.destination }}'?</p>
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+    </form>
+    <a href="{% url 'flights' %}">Cancel</a>
+{% endblock body %}

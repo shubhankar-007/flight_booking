@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+    <title>List of Flights</title>
+</head>
+{% endblock %}
+
+{% block body %}
+    <nav>
+        <ul class="navbar">
+            {% if user.is_authenticated and user.first_name == 'flight' and user.last_name == 'manager' %}
+            <li class="nav-item">
+                <a class="nav-link btn btn-dark" href="{% url 'create-flight' %}">Add a new flight</a>
+            </li>
+            
+            {% endif %}
+        </ul>
+    </nav>
+    <h1>List of Flights</h1>
+    <ul>
+        {% for flight in flights %}
+        <li>
+            <a href="{% url 'flight-detail' flight.pk %}">
+                Flight: {{ flight.flight_number }} from {{ flight.source }} to {{ flight.destination }}
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock body %}

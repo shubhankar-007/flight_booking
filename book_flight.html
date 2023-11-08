@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+    <title>Book Flight</title>
+</head>
+{% endblock %}
+
+{% block body %}
+    <h2>Book a Flight</h2>
+    <p>Flight: {{ flight.flight_number }} from {{ flight.source }} to {{ flight.destination }}</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for "passenger_name">Passenger Name:</label>
+        <input type="text" name="passenger_name" required>
+        
+        <label for="seat_number">Seat Number:</label>
+        <select name="seat_number" required>
+            <option value="" disabled selected>Select a Seat</option>
+            {% for seat in available_seats %}
+                <option value="{{ seat }}">{{ seat }}</option>
+            {% endfor %}
+        </select>
+    
+        <input type="submit" value="Book Flight">
+    </form>
+{% endblock body %}

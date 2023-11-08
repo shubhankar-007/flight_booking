@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+    <title>My Bookings</title>
+</head>
+{% endblock %}
+{% block body %}
+    <h1>My Bookings</h1>
+    {% if bookings %}
+    <ul>
+        {% for booking in bookings %}
+            <li>
+                <strong>Flight:</strong> {{ booking.flight.flight_number }}<br>
+                <strong>Passenger Name:</strong> {{ booking.passenger_name }}<br>
+                <strong>Seat Number:</strong> {{ booking.seat_number }}<br>
+                <a href="{% url 'cancel-booking' booking.id %}">Cancel Booking</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No bookings done till now!!!</p>
+    {% endif %}
+    <a href="{% url 'index' %}">Back to Home</a>
+    
+    <script>
+        // JavaScript to disable selected seats
+        $(document).ready(function () {
+            var bookedSeats = {{ booked_seats|safe }};  // Pass the list of booked seats from your view
+            $("select[name='seat_number']").find('option').each(function () {
+                if (bookedSeats.includes($(this).val())) {
+                    $(this).prop('disabled', true);
+                }
+            });
+        });
+    </script>
+{% endblock body %}

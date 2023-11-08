@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Add Flight</h1>
+  <form method="post">
+    {% csrf_token %}
+    <label for="flight_number">Flight Number:</label>
+    <input type="text" name="flight_number"><br>
+    <label for="source">Source:</label>
+    <input type="text" name="source"><br>
+    <label for="destination">Destination:</label>
+    <input type="text" name="destination"><br>
+    <label for="departure_date">Departure Date:</label>
+    <input type="datetime-local" name="departure_date"><br>
+    <input type="submit" value="Save">
+  </form>
+  <a href="{% url 'flights' %}">Back to Flights</a>
+{% endblock %}

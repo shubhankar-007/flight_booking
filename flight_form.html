@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+    <title>{% if form.instance.pk %}Edit Flight{% else %}Add Flight{% endif %}</title>
+{% endblock head %}
+
+{% block body %}
+    <h1>{% if form.instance.pk %}Edit Flight{% else %}Add Flight{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="{% if form.instance.pk %}Update Flight{% else %}Add Flight{% endif %}">
+    </form>
+    <a href="{% url 'flights' %}">Back to Flight List</a>
+{% endblock body %}

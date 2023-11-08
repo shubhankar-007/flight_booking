@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+    <title>Cancel Booking</title>
+{% endblock head %}
+
+{% block body %}
+    <h1>Cancel Booking</h1>
+    <p>Are you sure you want to cancel this booking?</p>
+    <p><strong>Flight:</strong> {{ booking.flight.flight_number }}</p>
+    <p><strong>Passenger Name:</strong> {{ booking.passenger_name }}</p>
+    <p><strong>Seat Number:</strong> {{ booking.seat_number }}</p>
+    <form method="post" action="{% url 'cancel-booking' booking.id %}">
+        {% csrf_token %}
+        <input type="submit" value="Confirm Cancel">
+    </form>
+    <a href="{% url 'my_bookings' %}">Back to My Bookings</a>
+{% endblock body %}
